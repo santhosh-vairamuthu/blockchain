@@ -21,18 +21,16 @@ class MerkleTree {
     }
 
     buildTree() {
-        let leaves = this.transactions.map((tx) => this.hash(tx));
-        if (leaves.length % 2 === 1) {
-            leaves.push(leaves[leaves.length - 1]);
+        let level = this.transactions.map((transaction) => this.hash(transaction));
+        if (level.length % 2 === 1) {
+            level.push(leaves[leaves.length - 1]);
         }
-        let tree = leaves.slice();
-
-        while (tree.length > 1) {
-            this.treeData.push(tree.slice());
-            tree = this.buildLevel(tree);
+        while (level.length > 1) {
+            this.treeData.push(level.slice());
+            level = this.buildLevel(level);
         }
 
-        return tree;
+        return level;
     }
 
     hash(data) {
@@ -122,7 +120,3 @@ const transaction2 = "TxInvalid";
 
 console.log(`${transaction1} - ${merkleTree.validateTransaction(transaction1)}`);
 console.log(`${transaction2} - ${merkleTree.validateTransaction(transaction2)}`);
-
-// for(let i = 0; i <merkleTree.treeData.length; i++){
-//     console.log(merkleTree.treeData[i]);
-// }
