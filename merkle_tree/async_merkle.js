@@ -130,7 +130,11 @@ merkleTree.validateTransaction(transaction1)
         let t2 = performance.now();
         console.log(`Time taken for ${transaction1}: ${t2 - t1} ms`);
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+        console.log(`${transaction2} - ${error}`);
+        let t2 = performance.now();
+        console.log(`Time taken for ${transaction2}: ${t2 - t1} ms`);
+    });
 
 merkleTree.validateTransaction(transaction2)
     .then(result => {
